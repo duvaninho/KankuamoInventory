@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KankuamoInventory.Presentation", "KankuamoInventory.Presentation\KankuamoInventory.Presentation.csproj", "{630653AD-7171-4F5E-A917-4631BC5A35BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KankuamoInventory.Core", "KankuamoInventory.Core\KankuamoInventory.Core.csproj", "{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KankuamoInventory.Data", "KankuamoInventory.Data\KankuamoInventory.Data.csproj", "{35A2EB95-9974-41F4-8117-575C090B32E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{630653AD-7171-4F5E-A917-4631BC5A35BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630653AD-7171-4F5E-A917-4631BC5A35BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630653AD-7171-4F5E-A917-4631BC5A35BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630653AD-7171-4F5E-A917-4631BC5A35BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35A2EB95-9974-41F4-8117-575C090B32E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35A2EB95-9974-41F4-8117-575C090B32E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35A2EB95-9974-41F4-8117-575C090B32E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35A2EB95-9974-41F4-8117-575C090B32E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
