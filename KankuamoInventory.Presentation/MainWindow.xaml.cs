@@ -1,36 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KankuamoInventory.Core.Managers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using KankuamoInventory.Core.Managers;
-using KankuamoInventory.Core.Managers.Implementation;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace KankuamoInventory.Presentation
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
-        private void BtnCreateEquipment_OnClick(object sender, RoutedEventArgs e)
-        {
-            CrudEquipment crudEquipment = new CrudEquipment();
-            Content = crudEquipment;
-        }
-    }
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
+	{
+		private readonly ITechnologyEquipmentManager _technologyEquipmentManager;
+
+		public MainWindow()
+		{
+			_technologyEquipmentManager = App.GetService<ITechnologyEquipmentManager>();
+			InitializeComponent();
+			Application.Current.MainWindow = this;
+			Loaded += OnMainWindowLoaded;
+		}
+
+		private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+		{
+			ChangeView(new MainPage(_technologyEquipmentManager));
+		}
+
+		public void ChangeView(Page view)
+		{
+			MainFrame.NavigationService.Navigate(view);
+		}
+	}
 }

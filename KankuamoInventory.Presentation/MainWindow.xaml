@@ -7,34 +7,10 @@
         mc:Ignorable="d"
         Title="Inventario" Height="450" Width="800">
     <Grid Margin="5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" Grid.ColumnSpan="2">
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Text="Inventario"></TextBlock>
-        </Border>
-        <Border Grid.Row="1" Grid.Column="1">
-            <Button HorizontalAlignment="Right" Name="BtnCreateEquipment" Cursor="Hand" Height="30"
-                    Background="#b9ffb7" Click="BtnCreateEquipment_OnClick">
-                <TextBlock Text="Agregar Equipo"></TextBlock>
-            </Button>
-        </Border>
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False"
-                  CanUserReorderColumns="True" CanUserResizeRows="False" CanUserResizeColumns="False"
-                  x:Name="GridEquipments">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Número de serie" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Header="Estado" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="Nombre" Width="*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Descripción" Width="2*"></DataGridTextColumn>
-                <DataGridTextColumn Header="Fecha de adquisición"></DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Frame 
+            Name="MainFrame"
+            Margin="16"
+            Background="White"
+            NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

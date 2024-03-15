@@ -1,0 +1,67 @@
+﻿<Page x:Class="KankuamoInventory.Presentation.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KankuamoInventory.Presentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Grid.ColumnSpan="2">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Text="Inventario"></TextBlock>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="1">
+            <Button HorizontalAlignment="Right" Name="BtnCreateEquipment" Cursor="Hand" Height="30"
+                    Background="#b9ffb7" Click="BtnCreateEquipment_OnClick" BorderThickness="1,2,2,2">
+                <TextBlock Text="Agregar Equipo"></TextBlock>
+            </Button>
+        </Border>
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False"
+                  CanUserReorderColumns="True" CanUserResizeRows="False" CanUserResizeColumns="False"
+                  x:Name="GridEquipments" 
+                  ItemsSource="{Binding Equipments}">
+            <DataGrid.Columns>
+            <DataGridTemplateColumn Header="Opciones" Width="250">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                        <Button Content="Movimientos" 
+                                x:Name="BtnSeeMovements"
+                                Background="Aqua"
+                                BorderBrush="Transparent"
+                                Foreground="White"
+                                Click="SeeMovements_OnClick"
+                                />
+
+                         <Button Content="Modificar" 
+                                x:Name="BtnModify"
+                                Background="Aqua"
+                                BorderBrush="Transparent"
+                                Foreground="White"
+                                Click="Modify_OnClick"
+                                />
+                        </DockPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding SerialNumber}" Header="Número de serie" Width="150"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding State}" Header="Estado" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Nombre" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Descripción" Width="2*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding AcquisitionDate}" Header="Fecha de adquisición"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>
