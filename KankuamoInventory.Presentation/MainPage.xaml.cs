@@ -49,7 +49,9 @@ namespace KankuamoInventory.Presentation
 
 		private void SeeMovements_OnClick(object sender, RoutedEventArgs e)
 		{
-			throw new System.NotImplementedException();
+			var technologyEquipmentModel = GridEquipments.SelectedItem as TechnologyEquipmentModel;
+			var movements = new MovementCrud(_technologyEquipmentManager, technologyEquipmentModel);
+			Content = movements;
 		}
 
 		private void Modify_OnClick(object sender, RoutedEventArgs e)

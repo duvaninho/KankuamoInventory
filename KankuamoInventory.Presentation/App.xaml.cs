@@ -27,14 +27,15 @@ namespace KankuamoInventory.Presentation
 
 			// Register your services here
 			services.AddTransient<ITechnologyEquipmentManager, TechnologyEquipmentManager>();// Example
-			services.AddDbContext<KankuamoInventoryContext>((_, optionsBuilder) => optionsBuilder
-				.UseInMemoryDatabase("KankuamoInventory"));
+			services.AddDbContext<KankuamoInventoryContext>();
 
 			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddScoped<IDbContext, KankuamoInventoryContext>();
 
 			// Build the service provider
 			ServiceProvider = services.BuildServiceProvider();
+
+			ServiceProvider.GetRequiredService<KankuamoInventoryContext>().Database.Migrate();
 		}
 
 		public static T GetService<T>()

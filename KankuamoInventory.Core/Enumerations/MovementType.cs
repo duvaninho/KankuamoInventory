@@ -2,9 +2,10 @@
 
 public enum MovementType
 {
-    Transfer,
-    Loan,
-    Return,
-    Maintenance,
-    Disposal
+	Transfer,
+	Loan,
+	Return,
+	Maintenance,
+	Disposal,
+	Unknown
 }

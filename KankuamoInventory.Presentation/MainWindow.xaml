@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KankuamoInventory.Presentation"
         mc:Ignorable="d"
         Title="Inventario" Height="450" Width="800">
-    <Grid Margin="5">
+    <Grid Background="#E7F2F8">
         <Frame 
             Name="MainFrame"
             Margin="16"

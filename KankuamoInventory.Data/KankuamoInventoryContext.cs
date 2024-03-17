@@ -4,20 +4,17 @@ namespace KankuamoInventory.Data;
 
 public class KankuamoInventoryContext : DbContextBase
 {
-	public KankuamoInventoryContext(DbContextOptions options) : base(options)
-	{
-	}
-
 	public DbSet<EquipmentMovementModel> Movements { get; set; }
 	public DbSet<TechnologyEquipmentModel> Equipments { get; set; }
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		optionsBuilder.UseSqlite("Data Source=KankuamoInventory.sqlite");
+	}
 }
 
 public class DbContextBase : DbContext, IDbContext
 {
-	public DbContextBase(DbContextOptions options) : base(options)
-	{
-
-	}
 
 	public void SetModified(object entity)
 	{

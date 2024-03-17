@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:KankuamoInventory.Presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="#E7F2F8"
       Title="MainPage">
 
     <Grid>
@@ -23,40 +24,44 @@
         </Border>
         <Border Grid.Row="1" Grid.Column="1">
             <Button HorizontalAlignment="Right" Name="BtnCreateEquipment" Cursor="Hand" Height="30"
-                    Background="#b9ffb7" Click="BtnCreateEquipment_OnClick" BorderThickness="1,2,2,2">
+                    Background="#FFA384" Click="BtnCreateEquipment_OnClick">
                 <TextBlock Text="Agregar Equipo"></TextBlock>
             </Button>
         </Border>
         <DataGrid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="False"
-                  CanUserReorderColumns="True" CanUserResizeRows="False" CanUserResizeColumns="False"
+                  CanUserReorderColumns="True" CanUserResizeRows="True" CanUserResizeColumns="True"
                   x:Name="GridEquipments" 
                   ItemsSource="{Binding Equipments}">
             <DataGrid.Columns>
-            <DataGridTemplateColumn Header="Opciones" Width="250">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <DockPanel>
-                        <Button Content="Movimientos" 
+                <DataGridTemplateColumn Header="Opciones" Width="250">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Content="Movimientos" 
                                 x:Name="BtnSeeMovements"
-                                Background="Aqua"
+                                Background="#74BDCB"
                                 BorderBrush="Transparent"
-                                Foreground="White"
                                 Click="SeeMovements_OnClick"
+                                Cursor="Hand"
                                 />
 
-                         <Button Content="Modificar" 
-                                x:Name="BtnModify"
-                                Background="Aqua"
-                                BorderBrush="Transparent"
-                                Foreground="White"
-                                Click="Modify_OnClick"
-                                />
-                        </DockPanel>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
+                            <Button Grid.Column="1" Content="Modificar" 
+                                    x:Name="BtnModify"
+                                    Background="#EFE7BC"
+                                    BorderBrush="Transparent"
+                                    Click="Modify_OnClick"
+                                    Cursor="Hand"
+                            />
+                        </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding SerialNumber}" Header="Número de serie" Width="150"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding State}" Header="Estado" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding StateName}" Header="Estado" Width="100"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Name}" Header="Nombre" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Description}" Header="Descripción" Width="2*"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding AcquisitionDate}" Header="Fecha de adquisición"></DataGridTextColumn>

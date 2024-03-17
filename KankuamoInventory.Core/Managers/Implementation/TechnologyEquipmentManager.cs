@@ -16,7 +16,7 @@ public class TechnologyEquipmentManager : ITechnologyEquipmentManager
 		var result = new ResultModel<string>()
 		{
 			SuccessfulOperation = true,
-			Message = string.Empty,
+			Message = "Equipo registrado con exito",
 		};
 
 		try
@@ -24,7 +24,6 @@ public class TechnologyEquipmentManager : ITechnologyEquipmentManager
 			await _unitOfWork.GenericRepository<TechnologyEquipmentModel>().AddAsync(technologyEquipment);
 			await _unitOfWork.CommitAsync();
 			result.SuccessfulOperation = true;
-			result.Message = "Equipo registrado con exito";
 		}
 		catch (Exception e)
 		{
@@ -41,7 +40,7 @@ public class TechnologyEquipmentManager : ITechnologyEquipmentManager
 		var result = new ResultModel<string>()
 		{
 			SuccessfulOperation = true,
-			Message = string.Empty,
+			Message = "Equipo actualizado con exito",
 		};
 
 		try
@@ -49,7 +48,32 @@ public class TechnologyEquipmentManager : ITechnologyEquipmentManager
 			_unitOfWork.GenericRepository<TechnologyEquipmentModel>().Edit(technologyEquipment);
 			await _unitOfWork.CommitAsync();
 			result.SuccessfulOperation = true;
-			result.Message = "Equipo actualizado con exito";
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			result.SuccessfulOperation = false;
+			result.Message = _THERE_WAS_AN_UNEXPECTED_ERROR;
+		}
+
+		return result;
+	}
+
+	public async Task<ResultModel<IEnumerable<EquipmentMovementModel>>> GetMovementsByEquipmentIdAsync(int equipmentId)
+	{
+		var result = new ResultModel<IEnumerable<EquipmentMovementModel>>()
+		{
+			SuccessfulOperation = true,
+			Message = string.Empty,
+			Data = Enumerable.Empty<EquipmentMovementModel>()
+		};
+
+		try
+		{
+			var equipments = await _unitOfWork
+				.GenericRepository<EquipmentMovementModel>()
+				.FindByAsync(t => t.EquipmentId == equipmentId);
+			result.Data = equipments.OrderByDescending(t => t.Id);
 		}
 		catch (Exception e)
 		{
@@ -73,7 +97,7 @@ public class TechnologyEquipmentManager : ITechnologyEquipmentManager
 		try
 		{
 			var equipments = await _unitOfWork.GenericRepository<TechnologyEquipmentModel>().GetAllAsync();
-			result.Data = equipments;
+			result.Data = equipments.OrderByDescending(t => t.Id);
 		}
 		catch (Exception e)
 		{
@@ -85,23 +109,20 @@ public class TechnologyEquipmentManager : ITechnologyEquipmentManager
 		return result;
 	}
 
-	public async Task<ResultModel<string>> AddMovementsAsync(int equipmentId, EquipmentMovementModel movement)
+	public async Task<ResultModel<string>> AddMovementsAsync(TechnologyEquipmentModel? equipment, EquipmentMovementModel movement)
 	{
 		var result = new ResultModel<string>()
 		{
 			SuccessfulOperation = true,
-			Message = string.Empty
+			Message = "Movimiento agregado con éxito"
 		};
 
 		try
 		{
-			var equipment = await _unitOfWork.GenericRepository<TechnologyEquipmentModel?>().FindAsync(equipmentId);
-
 			if (equipment is not null)
 			{
 				equipment.AddMovement(movement);
 				result.SuccessfulOperation = true;
-				result.Message = "Movimiento agregado con éxito";
 
 				await _unitOfWork.CommitAsync();
 			}

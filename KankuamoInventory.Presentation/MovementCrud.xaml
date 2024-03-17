@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="KankuamoInventory.Presentation.EquipmentCrud"
+﻿<UserControl x:Class="KankuamoInventory.Presentation.MovementCrud"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition Width="10" />
@@ -26,6 +25,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.ColumnSpan="7">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"
@@ -35,45 +35,34 @@
         <Button Grid.Row="1" Grid.Column="0" Content="Regresar" Click="GoBack_OnClick" HorizontalAlignment="Center" Background="#74BDCB"
                     Width="100" Height="30" Cursor="Hand" />
 
-        <Button Grid.Row="1" Grid.Column="6" Content="Guardar" Background="#FFA384" Click="ButtonSave_OnClick" HorizontalAlignment="Center"
+        <Button Grid.Row="1" Grid.Column="5" Content="Guardar" Click="Save_OnClick" HorizontalAlignment="Center" Background="#FFA384"
                     Height="30" Width="100" Cursor="Hand" />
 
-        <TextBlock Grid.Column="1" Grid.Row="2"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center">
-                Nombre:
+        <TextBlock Grid.Row="3" Grid.Column="1" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center">
+            Tipo:
         </TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="2" x:Name="TxtName" />
+        <ComboBox Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" x:Name="CmbType" SelectedValuePath="Tag" />
 
-        <TextBlock Grid.Row="2" Grid.Column="4"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center">
-                Número de serie:
-        </TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="5" x:Name="TxtSerialNumber" />
-
-        <TextBlock Grid.Column="1" Grid.Row="4"
+        <TextBlock Grid.Row="5" Grid.Column="1"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center">
                 Descripción:
         </TextBlock>
-        <TextBox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="4" TextWrapping="Wrap" AcceptsReturn="True"
+        <TextBox Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" TextWrapping="Wrap" AcceptsReturn="True"
                      AcceptsTab="True" SpellCheck.IsEnabled="True" Language="en-Es"
                      x:Name="TxtDescription" />
 
-        <TextBlock Grid.Row="6" Grid.Column="1"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center">
-                Fecha de adquisición:
-        </TextBlock>
-        <DatePicker Grid.Row="6" Grid.Column="2" x:Name="DpAcquisitionDate" />
-
-        <TextBlock Grid.Row="6" Grid.Column="4"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center">
-                Estado:
-        </TextBlock>
-        <ComboBox Grid.Row="6" Grid.Column="5" x:Name="CmbState" SelectedValuePath="Tag" />
-
+        <DataGrid Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" AutoGenerateColumns="False" CanUserAddRows="False"
+                  CanUserReorderColumns="True" CanUserResizeRows="False" CanUserResizeColumns="True"
+                  x:Name="GridMovements" 
+                  ItemsSource="{Binding Movements}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding TypeName}" Header="Tipo" Width="100"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Description}" Header="Descripción" Width="2*"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding MovementDate}" Header="Fecha" Width="150"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

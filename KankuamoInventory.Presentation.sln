@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KankuamoInventory.Presentation", "KankuamoInventory.Presentation\KankuamoInventory.Presentation.csproj", "{630653AD-7171-4F5E-A917-4631BC5A35BD}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KankuamoInventory.Presentation", "KankuamoInventory.Presentation\KankuamoInventory.Presentation.csproj", "{630653AD-7171-4F5E-A917-4631BC5A35BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KankuamoInventory.Core", "KankuamoInventory.Core\KankuamoInventory.Core.csproj", "{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KankuamoInventory.Core", "KankuamoInventory.Core\KankuamoInventory.Core.csproj", "{A45B16EB-5A12-4BA2-9BCA-C2516171F5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KankuamoInventory.Data", "KankuamoInventory.Data\KankuamoInventory.Data.csproj", "{35A2EB95-9974-41F4-8117-575C090B32E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KankuamoInventory.Data", "KankuamoInventory.Data\KankuamoInventory.Data.csproj", "{35A2EB95-9974-41F4-8117-575C090B32E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,11 @@ Global
 		{35A2EB95-9974-41F4-8117-575C090B32E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A2EB95-9974-41F4-8117-575C090B32E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A2EB95-9974-41F4-8117-575C090B32E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21814208-F76E-4F5F-8E69-90FF09356223}
 	EndGlobalSection
 EndGlobal

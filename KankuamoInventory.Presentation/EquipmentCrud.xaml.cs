@@ -11,10 +11,6 @@ namespace KankuamoInventory.Presentation
 	/// </summary>
 	public partial class EquipmentCrud : UserControl
 	{
-		private const string? _AVAILABLE = "Disponible";
-		private const string? _IN_USE = "En uso";
-		private const string? _UNDER_REPAIR = "Bajo Reparación";
-		private const string? _DISPOSED = "Dado de baja";
 		private const string _CREATE_EQUIPMENT_TITLE = "Crear Equipo";
 		private readonly ITechnologyEquipmentManager _technologyEquipmentManager;
 		private TechnologyEquipmentModel? _selectedItem;
@@ -23,6 +19,21 @@ namespace KankuamoInventory.Presentation
 			_technologyEquipmentManager = technologyEquipmentManager;
 			InitializeComponent();
 			Title.Text = _CREATE_EQUIPMENT_TITLE;
+			LoadCmbStateElements();
+		}
+
+		private void LoadCmbStateElements()
+		{
+			foreach (var state in TechnologyEquipmentModel.GetEquipmentStates())
+			{
+				var comboBoxItem = new ComboBoxItem { Content = state.Name, Tag = state.Value };
+				CmbState.Items.Add(comboBoxItem);
+			}
+
+			if (_selectedItem is not null)
+			{
+				CmbState.SelectedValue = _selectedItem.State;
+			}
 		}
 
 		public EquipmentCrud(ITechnologyEquipmentManager technologyEquipmentManager, TechnologyEquipmentModel? technologyEquipmentModel)
@@ -31,6 +42,7 @@ namespace KankuamoInventory.Presentation
 			InitializeComponent();
 			Title.Text = "Modificar Equipo";
 			SetItemToUpdate(technologyEquipmentModel);
+			LoadCmbStateElements();
 		}
 
 		private void GoBack_OnClick(object sender, RoutedEventArgs e)
@@ -41,17 +53,15 @@ namespace KankuamoInventory.Presentation
 
 		private void ButtonSave_OnClick(object sender, RoutedEventArgs e)
 		{
-			ComboBoxItem typeItem = (ComboBoxItem)CmbState.SelectedItem;
-			string value = typeItem?.Content?.ToString() ?? _AVAILABLE;
-
-			EquipmentState state = value switch
+			if (!DpAcquisitionDate.SelectedDate.HasValue)
 			{
-				_AVAILABLE => EquipmentState.Available,
-				_IN_USE => EquipmentState.InUse,
-				_UNDER_REPAIR => EquipmentState.UnderRepair,
-				_DISPOSED => EquipmentState.Disposed,
-				_ => EquipmentState.Available
-			};
+				MessageBox.Show("La fecha de adquisición es requerida");
+				return;
+			}
+
+			var typeValue = CmbState.SelectedValue is EquipmentState selectedValue ? selectedValue : EquipmentState.Available;
+
+			var state = typeValue;
 
 			var equipment = new TechnologyEquipmentModel
 			{
@@ -66,6 +76,7 @@ namespace KankuamoInventory.Presentation
 			if (Title.Text == _CREATE_EQUIPMENT_TITLE)
 			{
 				resultCreation = _technologyEquipmentManager.CreateTechnologyEquipment(equipment).ConfigureAwait(false).GetAwaiter().GetResult();
+				MessageBox.Show(resultCreation.Message);
 			}
 			else
 			{
@@ -86,7 +97,7 @@ namespace KankuamoInventory.Presentation
 			TxtSerialNumber.Clear();
 			TxtDescription.Clear();
 			DpAcquisitionDate.SelectedDate = null;
-			//TODO: Clear ComboBox
+			CmbState.SelectedValue = null;
 		}
 
 		public void SetItemToUpdate(TechnologyEquipmentModel? selectedItem)
@@ -98,23 +109,9 @@ namespace KankuamoInventory.Presentation
 				TxtName.Text = _selectedItem.Name;
 				TxtSerialNumber.Text = _selectedItem.SerialNumber;
 				DpAcquisitionDate.SelectedDate = _selectedItem.AcquisitionDate;
-				string textValueFromEnum = GetTextValueFromEnum(_selectedItem.State);
+				string textValueFromEnum = TechnologyEquipmentModel.GetTextValueFromEnum(_selectedItem.State);
 				//TODO: Set ComboBox value
 			}
-		}
-
-		private string GetTextValueFromEnum(EquipmentState state)
-		{
-			string value = (state switch
-			{
-				EquipmentState.Available => _AVAILABLE,
-				EquipmentState.InUse => _IN_USE,
-				EquipmentState.UnderRepair => _UNDER_REPAIR,
-				EquipmentState.Disposed => _DISPOSED,
-				_ => _AVAILABLE
-			})!;
-
-			return value;
 		}
 	}
 }
